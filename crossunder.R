@@ -1,0 +1,38 @@
+# =============================================================================
+# BDA400 - Assignment 5: Technical Analysis using R
+# File: crossunder.R
+# Function: crossunder() - detects when arr1 crosses below arr2
+# =============================================================================
+#
+# Crossunder[i] = TRUE if arr1[i] < arr2[i] AND arr1[i-1] >= arr2[i-1]
+#                 FALSE otherwise
+
+crossunder <- function(arr1, arr2) {
+  # Check if the length of both arrays is the same
+  if (length(arr1) != length(arr2)) {
+    stop("Both arrays should have the same length")
+  }
+
+  # Initialize a vector to store the crossunder signals
+  crossunder_signals <- character(length(arr1))
+  crossunder_signals[1] <- "None"
+
+  # Check for crossunder signals at each data point
+  for (i in 2:length(arr1)) {
+    if (arr1[i] < arr2[i] && arr1[i - 1] >= arr2[i - 1]) {
+      crossunder_signals[i] <- "True"
+    } else {
+      crossunder_signals[i] <- "False"
+    }
+  }
+
+  return(crossunder_signals)
+}
+
+# -----------------------------------------------------------------------------
+# Example usage / manual test
+# -----------------------------------------------------------------------------
+# arr1 <- c(10, 12, 15, 20, 18, 22, 25, 24, 21)
+# arr2 <- c(18, 20, 22, 18, 15, 12, 10, 11, 13)
+# crossunder_signals <- crossunder(arr1, arr2)
+# print(crossunder_signals)
